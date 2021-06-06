@@ -1,12 +1,9 @@
-using MLAPI;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCameraController : MonoBehaviour
 {
-    private NetworkObject networkObject;
-	public GameObject playerCamera;
+    public GameObject playerCamera;
 
 	public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
 	public RotationAxes axes = RotationAxes.MouseXAndY;
@@ -124,11 +121,6 @@ public class PlayerCameraController : MonoBehaviour
 
 	void Start()
 	{
-		networkObject = GetComponent<NetworkObject>();
-		if (!networkObject.IsLocalPlayer)
-		{
-			Destroy(playerCamera.gameObject);
-		}
 		Rigidbody rb = GetComponent<Rigidbody>();
 		if (rb)
 			rb.freezeRotation = true;
