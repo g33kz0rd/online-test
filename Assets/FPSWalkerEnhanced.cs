@@ -1,8 +1,7 @@
-using MLAPI;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class FPSWalkerEnhanced : NetworkBehaviour
+public class FPSWalkerEnhanced : MonoBehaviour
 {
     [Tooltip("How fast the player moves when walking (default move speed).")]
     [SerializeField]
