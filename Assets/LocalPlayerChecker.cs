@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class LocalPlayerChecker : MonoBehaviour
 {
-    private NetworkObject networkObject;
-    public List<GameObject> objectsToRemove;
-    public List<Component> componentsToRemove;
+    [SerializeField]
+    private List<GameObject> objectsToRemove;
+    [SerializeField]
+    private List<Component> componentsToRemove;
 
     // Start is called before the first frame update
     void Start()
     {
-        networkObject = GetComponent<NetworkObject>();
+        var networkObject = GetComponent<NetworkObject>();
         if (!networkObject.IsLocalPlayer)
         {
             foreach (var objToRm in objectsToRemove)

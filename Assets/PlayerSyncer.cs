@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerSyncer : NetworkBehaviour
 {
-    public NetworkVariableVector3 Position = new NetworkVariableVector3(new NetworkVariableSettings
+    private NetworkVariableVector3 position = new NetworkVariableVector3(new NetworkVariableSettings
     {
         WritePermission = NetworkVariablePermission.OwnerOnly,
         ReadPermission = NetworkVariablePermission.Everyone
@@ -20,8 +20,8 @@ public class PlayerSyncer : NetworkBehaviour
     void Update()
     {
         if (networkObject.IsLocalPlayer)
-            Position.Value = transform.position;
+            position.Value = transform.position;
         else
-            transform.position = Position.Value;
+            transform.position = position.Value;
     }
 }
