@@ -8,6 +8,7 @@ public class PlayerSyncer : NetworkBehaviour
 {
     private NetworkObject networkObject;
 
+    //test
     public override void NetworkStart()
     {
         networkObject = GetComponent<NetworkObject>();
