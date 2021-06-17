@@ -1,37 +1,46 @@
 using MLAPI;
 using MLAPI.Messaging;
-using MLAPI.NetworkVariable;
-using System;
 using UnityEngine;
 
 public class PlayerSyncer : NetworkBehaviour
 {
     private NetworkObject networkObject;
+    private CharacterController characterController;
+    [SerializeField]
+    private Animator animator;
 
-    //test
     public override void NetworkStart()
     {
         networkObject = GetComponent<NetworkObject>();
+
+        if (!networkObject.IsOwner)
+            return;
+
+        characterController = GetComponent<CharacterController>();
     }
 
     void Update()
     {
-        if (networkObject.IsOwner)
-            InformServerRpc(transform.position);
+        if (!networkObject.IsOwner)
+            return;
+
+        InformServerRpc(transform.position, transform.rotation, Vector3.Magnitude(characterController.velocity));
     }
 
     [ServerRpc]
-    private void InformServerRpc(Vector3 position)
+    private void InformServerRpc(Vector3 position, Quaternion rotation, float speed)
     {
-        InformClientRpc(position);
+        InformClientRpc(position, rotation, speed);
     }
 
     [ClientRpc]
-    private void InformClientRpc(Vector3 position)
+    private void InformClientRpc(Vector3 position, Quaternion rotation, float speed)
     {
         if (networkObject.IsOwner)
             return;
 
         transform.position = position;
+        transform.rotation = rotation;
+        animator.SetFloat("Speed", speed);
     }
 }
