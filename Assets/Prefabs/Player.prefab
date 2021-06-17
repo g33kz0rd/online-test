@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 1258452824320468933}
   - component: {fileID: 1258452824320468932}
   - component: {fileID: 4186800950095068115}
+  - component: {fileID: 1175257575265385203}
   - component: {fileID: 4953341240314953030}
   - component: {fileID: 6252801173525204642}
   - component: {fileID: 1970416786633990557}
   - component: {fileID: 5342531166619703721}
   - component: {fileID: 5986805335846818603}
-  - component: {fileID: 9169562467382156286}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -70,7 +70,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 6962499720429244069}
-  axes: 0
+  axes: 2
+  sensitivityX: 15
+  sensitivityY: 15
+  minimumX: -360
+  maximumX: 360
+  minimumY: -60
+  maximumY: 60
+  frameCounter: 20
+--- !u!114 &1175257575265385203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258452824320468938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0816e1f842899e439a031e8ce2bf344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 1258452824320468938}
+  axes: 1
   sensitivityX: 15
   sensitivityY: 15
   minimumX: -360
@@ -108,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44149629c1c55d419f5aef1b74c6b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playerCameraContainer: {fileID: 6962499720429244069}
   m_WalkSpeed: 6
   m_RunSpeed: 11
   m_LimitDiagonalSpeed: 1
@@ -166,20 +188,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1258452825337010196}
   characterController: {fileID: 4953341240314953030}
---- !u!114 &9169562467382156286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258452824320468938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96fc6e4a71c1845c495a58b2a3e12d28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCameraContainer: {fileID: 6962499720429244069}
-  playerModel: {fileID: 1258452825329757140}
 --- !u!1 &1258452824926181452
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,11 +375,6 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: a9dce832a5cdf404c9fca4fa4b1f862a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2db7e17401e08b94697ecd7acce75ab1, type: 3}
---- !u!1 &1258452825329757140 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 2db7e17401e08b94697ecd7acce75ab1, type: 3}
-  m_PrefabInstance: {fileID: 1258452825329659252}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1258452825329530868 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 2db7e17401e08b94697ecd7acce75ab1, type: 3}

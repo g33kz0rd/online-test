@@ -3,6 +3,9 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class FPSWalkerEnhanced : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject m_playerCameraContainer;
+
     [Tooltip("How fast the player moves when walking (default move speed).")]
     [SerializeField]
     private float m_WalkSpeed = 6.0f;
@@ -190,6 +193,7 @@ public class FPSWalkerEnhanced : MonoBehaviour
 
         // Apply gravity
         m_MoveDirection.y -= m_Gravity * Time.deltaTime;
+
 
         // Move the controller, and set grounded true or false depending on whether we're standing on something
         m_Grounded = (m_Controller.Move(m_MoveDirection * Time.deltaTime) & CollisionFlags.Below) != 0;
