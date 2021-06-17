@@ -10,8 +10,6 @@ public class NetworkCommandLine : MonoBehaviour
     {
         netManager = GetComponentInParent<NetworkManager>();
 
-        if (Application.isEditor) return;
-
         var args = GetCommandlineArgs();
 
         if (args.TryGetValue("-mlapi", out string mlapiValue))
@@ -28,7 +26,9 @@ public class NetworkCommandLine : MonoBehaviour
                     netManager.StartClient();
                     break;
             }
+            return;
         }
+        netManager.StartHost();
     }
 
     private Dictionary<string, string> GetCommandlineArgs()

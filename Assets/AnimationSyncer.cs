@@ -2,7 +2,7 @@ using MLAPI;
 using MLAPI.Messaging;
 using UnityEngine;
 
-public class PlayerSyncer : NetworkBehaviour
+public class AnimationSyncer : NetworkBehaviour
 {
     private NetworkObject networkObject;
     private CharacterController characterController;
@@ -24,23 +24,20 @@ public class PlayerSyncer : NetworkBehaviour
         if (!networkObject.IsOwner)
             return;
 
-        InformServerRpc(transform.position, transform.rotation, Vector3.Magnitude(characterController.velocity));
+        InformServerRpc(Vector3.Magnitude(characterController.velocity));
     }
 
     [ServerRpc]
-    private void InformServerRpc(Vector3 position, Quaternion rotation, float speed)
+    private void InformServerRpc(float speed)
     {
-        InformClientRpc(position, rotation, speed);
+        InformClientRpc(speed);
     }
 
     [ClientRpc]
-    private void InformClientRpc(Vector3 position, Quaternion rotation, float speed)
+    private void InformClientRpc(float speed)
     {
         if (networkObject.IsOwner)
             return;
-
-        transform.position = position;
-        transform.rotation = rotation;
         animator.SetFloat("Speed", speed);
     }
 }

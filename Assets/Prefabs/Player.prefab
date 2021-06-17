@@ -10,13 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1258452824320468933}
   - component: {fileID: 1258452824320468932}
+  - component: {fileID: 1970416786633990557}
   - component: {fileID: 4186800950095068115}
   - component: {fileID: 1175257575265385203}
   - component: {fileID: 4953341240314953030}
   - component: {fileID: 6252801173525204642}
-  - component: {fileID: 1970416786633990557}
-  - component: {fileID: 5342531166619703721}
   - component: {fileID: 5986805335846818603}
+  - component: {fileID: 5342531166619703721}
+  - component: {fileID: 8025308766391124185}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -57,6 +58,26 @@ MonoBehaviour:
   PrefabHashGenerator: Player
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
+--- !u!114 &1970416786633990557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258452824320468938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a44ba1414cc64b5478e8329e87b230de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToRemove:
+  - {fileID: 6962499720429244069}
+  componentsToRemove:
+  - {fileID: 4186800950095068115}
+  - {fileID: 6252801173525204642}
+  - {fileID: 4953341240314953030}
+  - {fileID: 5986805335846818603}
+  - {fileID: 1175257575265385203}
 --- !u!114 &4186800950095068115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,8 +92,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 6962499720429244069}
   axes: 2
-  sensitivityX: 15
-  sensitivityY: 15
+  sensitivityX: 8
+  sensitivityY: 8
   minimumX: -360
   maximumX: 360
   minimumY: -60
@@ -92,8 +113,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1258452824320468938}
   axes: 1
-  sensitivityX: 15
-  sensitivityY: 15
+  sensitivityX: 8
+  sensitivityY: 8
   minimumX: -360
   maximumX: 360
   minimumY: -60
@@ -137,45 +158,12 @@ MonoBehaviour:
   m_JumpSpeed: 8
   m_Gravity: 20
   m_FallingThreshold: 10
-  m_SlideWhenOverSlopeLimit: 0
-  m_SlideOnTaggedObjects: 0
+  m_SlideWhenOverSlopeLimit: 1
+  m_SlideOnTaggedObjects: 1
   m_SlideSpeed: 12
-  m_AirControl: 0
+  m_AirControl: 1
   m_AntiBumpFactor: 0.75
   m_AntiBunnyHopFactor: 1
---- !u!114 &1970416786633990557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258452824320468938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a44ba1414cc64b5478e8329e87b230de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectsToRemove:
-  - {fileID: 6962499720429244069}
-  componentsToRemove:
-  - {fileID: 4186800950095068115}
-  - {fileID: 6252801173525204642}
-  - {fileID: 4953341240314953030}
-  - {fileID: 5986805335846818603}
-  - {fileID: 1175257575265385203}
---- !u!114 &5342531166619703721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258452824320468938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e9693302a29c9947b0e4595fdf14e3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 1258452825337010196}
 --- !u!114 &5986805335846818603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +178,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1258452825337010196}
   characterController: {fileID: 4953341240314953030}
+--- !u!114 &5342531166619703721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258452824320468938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9693302a29c9947b0e4595fdf14e3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1258452825337010196}
+--- !u!114 &8025308766391124185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258452824320468938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 956f4d38f80188546ab7100310d9c8dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1258452824926181452
 GameObject:
   m_ObjectHideFlags: 0
