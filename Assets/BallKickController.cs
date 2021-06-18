@@ -1,3 +1,5 @@
+using MLAPI;
+using MLAPI.Messaging;
 using UnityEngine;
 
 public class BallKickController : MonoBehaviour
@@ -5,7 +7,13 @@ public class BallKickController : MonoBehaviour
     private GameObject ball;
     private Rigidbody ballRigidBody;
 
-    public float kickForce = 10;
+    [SerializeField]
+    private float kickForce = 10;
+
+    [SerializeField]
+    private BallGrabController grabber;
+    [SerializeField]
+    private GameObject cameraContainer;
 
     private void Start()
     {
@@ -15,20 +23,33 @@ public class BallKickController : MonoBehaviour
 
     void Update()
     {
-        if (ball.transform.parent != transform)
-            return;
-
         if (!Input.GetKey(KeyCode.F))
             return;
 
+        //KickBallServerRpc();
         ball.transform.parent = null;
         ballRigidBody.useGravity = true;
         ballRigidBody.isKinematic = false;
-        ballRigidBody.AddForce(transform.forward * kickForce + ballRigidBody.transform.up * kickForce * .1f);
+        var force = cameraContainer.transform.forward * kickForce;
+        ballRigidBody.AddForce(force);
     }
 
-    private void OnGUI()
+    [ServerRpc]
+    void KickBallServerRpc()
     {
-        GUI.TextField(new Rect(0, 0, 100, 20), $"Distance is {Vector3.Distance(ball.transform.position, transform.position)}");
+        if (!grabber.HasBall)
+            return;
+
+        KickControllerBallClientRpc();
+    }
+
+    [ClientRpc]
+    void KickControllerBallClientRpc()
+    {
+        ball.transform.parent = null;
+        ballRigidBody.useGravity = true;
+        ballRigidBody.isKinematic = false;
+        var force = cameraContainer.transform.forward * kickForce;
+        ballRigidBody.AddForce(force);
     }
 }
