@@ -2,7 +2,7 @@ using MLAPI;
 using MLAPI.Messaging;
 using UnityEngine;
 
-public class BallKickController : MonoBehaviour
+public class BallKickController : NetworkBehaviour
 {
     private GameObject ball;
     private Rigidbody ballRigidBody;

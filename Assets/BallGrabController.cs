@@ -2,7 +2,7 @@ using MLAPI;
 using MLAPI.Messaging;
 using UnityEngine;
 
-public class BallGrabController : MonoBehaviour
+public class BallGrabController : NetworkBehaviour
 {
     [SerializeField]
     private GameObject ballPrefab;
@@ -62,6 +62,7 @@ public class BallGrabController : MonoBehaviour
     [ClientRpc]
     void GrabBallClientRpc()
     {
+        ballNetworkObject.ChangeOwnership(networkObject.OwnerClientId);
         ball.transform.parent = playerHand;
         ball.transform.localPosition = Vector3.zero;
         ballRigidBody.useGravity = false;

@@ -28,7 +28,11 @@ public class NetworkCommandLine : MonoBehaviour
             }
             return;
         }
-        netManager.StartClient();
+
+        if (!Application.isEditor)
+            netManager.StartHost();
+        else
+            netManager.StartClient();
     }
 
     private Dictionary<string, string> GetCommandlineArgs()
