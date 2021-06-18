@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class BallGrabController : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject ballPrefab;
+
     private GameObject ball;
     private NetworkObject ballNetworkObject;
     private Rigidbody ballRigidBody;
-    [SerializeField]
-    private NetworkObject playerNetworkObject;
+    private NetworkObject networkObject;
     [SerializeField]
     private Transform playerHand;
 
@@ -22,8 +24,21 @@ public class BallGrabController : MonoBehaviour
 
     private void Start()
     {
-        ball = GameObject.FindGameObjectWithTag("Ball");
-        ballNetworkObject = ball.GetComponent<NetworkObject>();
+        networkObject = GetComponent<NetworkObject>();
+
+        if (NetworkManager.Singleton.IsHost)
+        {
+            ball = Instantiate(ballPrefab, Vector3.zero, Quaternion.identity);
+            ballNetworkObject = ball.GetComponent<NetworkObject>();
+            ballNetworkObject.SpawnWithOwnership(networkObject.OwnerClientId);
+        }
+        else
+        {
+            ball = GameObject.FindGameObjectWithTag("Ball");
+            ballNetworkObject = ball.GetComponent<NetworkObject>();
+        }
+
+
         ballRigidBody = ball.GetComponent<Rigidbody>();
     }
 
@@ -40,6 +55,7 @@ public class BallGrabController : MonoBehaviour
     {
         //if (Vector3.Distance(ball.transform.position, transform.position) > .5)
         //    return;
+        ballNetworkObject.ChangeOwnership(networkObject.OwnerClientId);
         GrabBallClientRpc();
     }
 
@@ -50,7 +66,6 @@ public class BallGrabController : MonoBehaviour
         ball.transform.localPosition = Vector3.zero;
         ballRigidBody.useGravity = false;
         ballRigidBody.isKinematic = true;
-        ballNetworkObject.ChangeOwnership(playerNetworkObject.OwnerClientId);
     }
 
     private void OnGUI()

@@ -28,7 +28,7 @@ public class NetworkCommandLine : MonoBehaviour
             }
             return;
         }
-        netManager.StartHost();
+        netManager.StartClient();
     }
 
     private Dictionary<string, string> GetCommandlineArgs()

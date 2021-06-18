@@ -101,7 +101,7 @@ MonoBehaviour:
   maximumX: 360
   minimumY: -60
   maximumY: 60
-  frameCounter: 20
+  frameCounter: 2
 --- !u!114 &1175257575265385203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,7 +122,7 @@ MonoBehaviour:
   maximumX: 360
   minimumY: -60
   maximumY: 60
-  frameCounter: 20
+  frameCounter: 2
 --- !u!143 &4953341240314953030
 CharacterController:
   m_ObjectHideFlags: 0
@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 031dcd1ede2910147861151ab4217a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballPrefab: {fileID: 3015900112515919536, guid: 6463cdb7c42ac894089a646d82bad406, type: 3}
   playerHand: {fileID: 1258452825329530790}
 --- !u!114 &-5662787829989692394
 MonoBehaviour:
@@ -232,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c9b69418396764395d34c5b84442e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kickForce: 500
+  kickForce: 50
   grabber: {fileID: -5899910939090170004}
   cameraContainer: {fileID: 6962499720429244069}
 --- !u!1 &1258452824926181452
