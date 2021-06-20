@@ -80,7 +80,6 @@ MonoBehaviour:
   - {fileID: 4953341240314953030}
   - {fileID: 5986805335846818603}
   - {fileID: 1175257575265385203}
-  - {fileID: -5899910939090170004}
 --- !u!114 &4186800950095068115
 MonoBehaviour:
   m_ObjectHideFlags: 0

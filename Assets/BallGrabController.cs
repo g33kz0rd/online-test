@@ -1,5 +1,6 @@
 using MLAPI;
 using MLAPI.Messaging;
+using System;
 using UnityEngine;
 
 public class BallGrabController : NetworkBehaviour
@@ -8,17 +9,19 @@ public class BallGrabController : NetworkBehaviour
     private GameObject ballPrefab;
 
     private GameObject ball;
+    private BallController ballController;
     private NetworkObject ballNetworkObject;
     private Rigidbody ballRigidBody;
     private NetworkObject networkObject;
     [SerializeField]
     private Transform playerHand;
+    private bool grabbed = false;
 
     public bool HasBall
     {
         get
         {
-            return ball.transform.parent == playerHand;
+            return grabbed;
         }
     }
 
@@ -26,11 +29,11 @@ public class BallGrabController : NetworkBehaviour
     {
         networkObject = GetComponent<NetworkObject>();
 
-        if (NetworkManager.Singleton.IsHost)
+        if (NetworkManager.Singleton.IsHost && networkObject.IsLocalPlayer)
         {
             ball = Instantiate(ballPrefab, Vector3.zero, Quaternion.identity);
             ballNetworkObject = ball.GetComponent<NetworkObject>();
-            ballNetworkObject.SpawnWithOwnership(networkObject.OwnerClientId);
+            ballNetworkObject.Spawn();
         }
         else
         {
@@ -38,12 +41,37 @@ public class BallGrabController : NetworkBehaviour
             ballNetworkObject = ball.GetComponent<NetworkObject>();
         }
 
-
+        ballController = ball.GetComponent<BallController>();
         ballRigidBody = ball.GetComponent<Rigidbody>();
+    }
+
+    internal void Drop()
+    {
+        ball.transform.parent = null;
+        ballRigidBody.useGravity = true;
+        ballRigidBody.isKinematic = false;
+        grabbed = false;
+        ballController.Grabbed = false;
+    }
+    internal void Grab()
+    {
+        ball.transform.parent = playerHand;
+        ball.transform.localPosition = Vector3.zero;
+        ballRigidBody.useGravity = false;
+        ballRigidBody.isKinematic = true;
+        grabbed = true;
+        ballController.Grabbed = true;
     }
 
     void Update()
     {
+        if (!networkObject.IsLocalPlayer)
+            return;
+
+        if (ballController.Grabbed)
+            return;
+
+
         if (!Input.GetKey(KeyCode.E))
             return;
 
@@ -62,15 +90,15 @@ public class BallGrabController : NetworkBehaviour
     [ClientRpc]
     void GrabBallClientRpc()
     {
-        ballNetworkObject.ChangeOwnership(networkObject.OwnerClientId);
-        ball.transform.parent = playerHand;
-        ball.transform.localPosition = Vector3.zero;
-        ballRigidBody.useGravity = false;
-        ballRigidBody.isKinematic = true;
+        Grab();
     }
 
     private void OnGUI()
     {
-        GUI.TextField(new Rect(0, 0, 100, 20), $"Distance is {Vector3.Distance(ball.transform.position, transform.position)}");
+        if (networkObject.IsLocalPlayer && NetworkManager.Singleton.IsHost)
+            GUI.TextField(new Rect(120, 0, 100, 20), "Is host");
+
+        if (networkObject.IsLocalPlayer)
+            GUI.TextField(new Rect(0, 0, 100, 20), $"Distance is {Vector3.Distance(ball.transform.position, transform.position)}");
     }
 }
