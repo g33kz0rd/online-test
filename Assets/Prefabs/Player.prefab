@@ -80,7 +80,6 @@ MonoBehaviour:
   - {fileID: 4953341240314953030}
   - {fileID: 5986805335846818603}
   - {fileID: 1175257575265385203}
-  - {fileID: -5899910939090170004}
 --- !u!114 &4186800950095068115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,7 +100,7 @@ MonoBehaviour:
   maximumX: 360
   minimumY: -60
   maximumY: 60
-  frameCounter: 20
+  frameCounter: 2
 --- !u!114 &1175257575265385203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,7 +121,7 @@ MonoBehaviour:
   maximumX: 360
   minimumY: -60
   maximumY: 60
-  frameCounter: 20
+  frameCounter: 2
 --- !u!143 &4953341240314953030
 CharacterController:
   m_ObjectHideFlags: 0
@@ -219,6 +218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 031dcd1ede2910147861151ab4217a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballPrefab: {fileID: 3015900112515919536, guid: 6463cdb7c42ac894089a646d82bad406, type: 3}
+  playerHand: {fileID: 1258452825329530790}
 --- !u!114 &-5662787829989692394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,7 +232,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c9b69418396764395d34c5b84442e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kickForce: 500
+  kickForce: 50
+  grabber: {fileID: -5899910939090170004}
+  cameraContainer: {fileID: 6962499720429244069}
 --- !u!1 &1258452824926181452
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,7 +261,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1258452824926181452}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.831}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1436815950175100829}
@@ -427,5 +430,10 @@ Transform:
 --- !u!95 &1258452825337010196 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9500000, guid: 2db7e17401e08b94697ecd7acce75ab1, type: 3}
+  m_PrefabInstance: {fileID: 1258452825329659252}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1258452825329530790 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400082, guid: 2db7e17401e08b94697ecd7acce75ab1, type: 3}
   m_PrefabInstance: {fileID: 1258452825329659252}
   m_PrefabAsset: {fileID: 0}

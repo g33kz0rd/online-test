@@ -1,34 +1,69 @@
+using MLAPI;
+using MLAPI.Messaging;
 using UnityEngine;
 
-public class BallKickController : MonoBehaviour
+public class BallKickController : NetworkBehaviour
 {
+    private NetworkObject networkObject;
     private GameObject ball;
     private Rigidbody ballRigidBody;
 
-    public float kickForce = 10;
+    [SerializeField]
+    private float kickForce = 10;
+
+    [SerializeField]
+    private BallGrabController grabber;
+    [SerializeField]
+    private GameObject cameraContainer;
 
     private void Start()
     {
+        networkObject = GetComponent<NetworkObject>();
+
         ball = GameObject.FindGameObjectWithTag("Ball");
         ballRigidBody = ball.GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        if (ball.transform.parent != transform)
+        if (!networkObject.IsLocalPlayer)
             return;
 
         if (!Input.GetKey(KeyCode.F))
             return;
 
-        ball.transform.parent = null;
-        ballRigidBody.useGravity = true;
-        ballRigidBody.isKinematic = false;
-        ballRigidBody.AddForce(transform.forward * kickForce + ballRigidBody.transform.up * kickForce * .1f);
+        KickBallServerRpc();
+        //ball.transform.parent = null;
+        //ballRigidBody.useGravity = true;
+        //ballRigidBody.isKinematic = false;
+        //var force = cameraContainer.transform.forward * kickForce;
+        //ballRigidBody.AddForce(force);
+    }
+
+    [ServerRpc]
+    void KickBallServerRpc()
+    {
+        if (!grabber.HasBall)
+            return;
+
+        KickControllerBallClientRpc();
+    }
+
+    [ClientRpc]
+    void KickControllerBallClientRpc()
+    {
+        grabber.Drop();
+
+        if (!networkObject.IsLocalPlayer)
+            return;
+
+        var force = cameraContainer.transform.forward * kickForce;
+        ballRigidBody.AddForce(force);
     }
 
     private void OnGUI()
     {
-        GUI.TextField(new Rect(0, 0, 100, 20), $"Distance is {Vector3.Distance(ball.transform.position, transform.position)}");
+        if (networkObject.IsLocalPlayer)
+            GUI.TextField(new Rect(0, 20, 100, 20), $"Has ball {grabber.HasBall}");
     }
 }
