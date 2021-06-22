@@ -5,6 +5,8 @@ using UnityEngine;
 public class GoalController : NetworkBehaviour
 {
     public int Score { get; set; }
+    [SerializeField]
+    private int team;
     private BallController ballController;
 
     private void FixedUpdate()
@@ -25,6 +27,8 @@ public class GoalController : NetworkBehaviour
         if (collision.gameObject.tag != "Ball")
             return;
 
+
+        if(ballController.OwnerTeam == team)
         GoalServerRpc();
     }
 

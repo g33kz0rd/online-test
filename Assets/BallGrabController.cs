@@ -51,7 +51,7 @@ public class BallGrabController : NetworkBehaviour
         ballRigidBody.useGravity = true;
         ballRigidBody.isKinematic = false;
         grabbed = false;
-        ballController.Grabbed = false;
+        ballController.Release();
     }
     internal void Grab()
     {
@@ -60,7 +60,7 @@ public class BallGrabController : NetworkBehaviour
         ballRigidBody.useGravity = false;
         ballRigidBody.isKinematic = true;
         grabbed = true;
-        ballController.Grabbed = true;
+        //ballController.Grab(networkObject.OwnerClientId);
     }
 
     void Update()

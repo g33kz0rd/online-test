@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c9b69418396764395d34c5b84442e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kickForce: 50
+  kickForce: 500
   grabber: {fileID: -5899910939090170004}
   cameraContainer: {fileID: 6962499720429244069}
 --- !u!1 &1258452824926181452

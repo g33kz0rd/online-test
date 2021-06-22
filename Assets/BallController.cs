@@ -1,12 +1,12 @@
 using MLAPI;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    public bool Grabbed { get; set; }
-    private Vector3 spawnPosition;
+    public bool Grabbed { get; private set; }
+    public int OwnerTeam { get; private set; }
+    [SerializeField]
+    private Transform spawnPosition;
     private Rigidbody rigidbody;
     private NetworkObject networkObject;
 
@@ -31,6 +31,17 @@ public class BallController : MonoBehaviour
 
         networkObject.RemoveOwnership();
         rigidbody.velocity = Vector3.zero;
-        transform.position = spawnPosition;
+        transform.position = spawnPosition.position;
+    }
+
+    public void Grab(int team)
+    {
+        Grabbed = true;
+        OwnerTeam = team;
+    }
+
+    public void Release()
+    {
+        Grabbed = false;
     }
 }
