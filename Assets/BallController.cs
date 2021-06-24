@@ -21,7 +21,7 @@ public class BallController : MonoBehaviour
 
     private void OnGUI()
     {
-        GUI.TextField(new Rect(240, 0, 100, 20), Grabbed ? "Grabbed" : "Loose");
+        VariableTrackerController.TrackVariable("General", gameObject, "BallGrab", Grabbed ? "Ball Grabbed" : "Ball Loose");
     }
 
     public void Reset()

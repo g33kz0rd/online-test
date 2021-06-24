@@ -25,10 +25,7 @@ public class GoalController : NetworkBehaviour
         if (collision.gameObject.tag != "Ball")
             return;
 
-        Debug.Log("colliderrrrr");
-
         GoalServerRpc();
-
     }
 
     [ServerRpc]
@@ -46,6 +43,6 @@ public class GoalController : NetworkBehaviour
 
     private void OnGUI()
     {
-        GUI.TextField(new Rect(360, 20, 100, 20), $"Score is: {Score}");
+        VariableTrackerController.TrackVariable("General", gameObject, "Score", $"Score is: {Score}");
     }
 }

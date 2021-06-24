@@ -64,6 +64,8 @@ public class BallKickController : NetworkBehaviour
     private void OnGUI()
     {
         if (networkObject.IsLocalPlayer)
-            GUI.TextField(new Rect(0, 20, 100, 20), $"Has ball {grabber.HasBall}");
+            VariableTrackerController.TrackVariable($"Local Player", gameObject, "HasBall", $"Has ball {grabber.HasBall}");
+        else
+            VariableTrackerController.TrackVariable($"Player {networkObject.OwnerClientId}", gameObject, "HasBall", $"Has ball {grabber.HasBall}");
     }
 }

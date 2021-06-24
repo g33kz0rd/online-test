@@ -71,18 +71,15 @@ public class BallGrabController : NetworkBehaviour
         if (ballController.Grabbed)
             return;
 
-
-        if (!Input.GetKey(KeyCode.E))
-            return;
-
         GrabBallServerRpc();
     }
 
     [ServerRpc]
     void GrabBallServerRpc()
     {
-        //if (Vector3.Distance(ball.transform.position, transform.position) > .5)
-        //    return;
+        if (Vector3.Distance(ball.transform.position, transform.position) > .5)
+            return;
+
         ballNetworkObject.ChangeOwnership(networkObject.OwnerClientId);
         GrabBallClientRpc();
     }
@@ -96,9 +93,11 @@ public class BallGrabController : NetworkBehaviour
     private void OnGUI()
     {
         if (networkObject.IsLocalPlayer && NetworkManager.Singleton.IsHost)
-            GUI.TextField(new Rect(120, 0, 100, 20), "Is host");
+            VariableTrackerController.TrackVariable("General", gameObject, "BallGrabIsHost", "Im host");
 
         if (networkObject.IsLocalPlayer)
-            GUI.TextField(new Rect(0, 0, 100, 20), $"Distance is {Vector3.Distance(ball.transform.position, transform.position)}");
+            VariableTrackerController.TrackVariable("Local Player", gameObject, "Distance", $"Distance { Math.Round(Vector3.Distance(ball.transform.position, transform.position)) }");
+        else
+            VariableTrackerController.TrackVariable($"Player {networkObject.OwnerClientId}", gameObject, "Distance", $"Distance { Math.Round(Vector3.Distance(ball.transform.position, transform.position)) }");
     }
 }
