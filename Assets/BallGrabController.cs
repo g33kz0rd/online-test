@@ -60,7 +60,6 @@ public class BallGrabController : NetworkBehaviour
         ballRigidBody.useGravity = false;
         ballRigidBody.isKinematic = true;
         grabbed = true;
-        //ballController.Grab(networkObject.OwnerClientId);
     }
 
     void Update()

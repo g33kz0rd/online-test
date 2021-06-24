@@ -29,10 +29,6 @@ public class NetworkCommandLine : MonoBehaviour
             return;
         }
 
-        //netManager.StartHost();
-
-        //return;
-
         if (!Application.isEditor)
             netManager.StartHost();
         else

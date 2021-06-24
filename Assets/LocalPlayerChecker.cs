@@ -9,7 +9,6 @@ public class LocalPlayerChecker : MonoBehaviour
     [SerializeField]
     private List<Component> componentsToRemove;
 
-    // Start is called before the first frame update
     void Start()
     {
         var networkObject = GetComponent<NetworkObject>();

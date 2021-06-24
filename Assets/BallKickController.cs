@@ -33,11 +33,6 @@ public class BallKickController : NetworkBehaviour
             return;
 
         KickBallServerRpc();
-        //ball.transform.parent = null;
-        //ballRigidBody.useGravity = true;
-        //ballRigidBody.isKinematic = false;
-        //var force = cameraContainer.transform.forward * kickForce;
-        //ballRigidBody.AddForce(force);
     }
 
     [ServerRpc]
